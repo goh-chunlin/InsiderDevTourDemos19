@@ -7,16 +7,40 @@
 
 <table>
     <tr>
-        <td>Description:</td>
-        <td><input type="text" bind="@description" /></td>
+        <td>Item:</td>
+        <td>
+            <select bind="@description" class="form-control">
+                <optgroup label="Breakfast">
+                    <option value="Nasi Lemak">Nasi Lemak</option>
+                    <option value="Mee Goreng Mamak">Mee Goreng Mamak</option>
+                </optgroup>
+                <optgroup label="Lunch">
+                    <option value="Rendang">Rendang</option>
+                    <option value="Nasi Kerabu">Nasi Kerabu</option>
+                </optgroup>
+                <optgroup label="Baverages">
+                    <option value="Kopi">Kopi</option>
+                    <option value="Kopi-O Siew Dai">Kopi-O Siew Dai</option>
+                    <option value="Teh">Teh</option>
+                    <option value="Milo">Milo</option>
+                </optgroup>
+            </select>
+        </td>
     </tr>
     <tr>
         <td>Quantity:</td>
-        <td><input type="number" bind="@quantity" /></td>
+        <td>
+            <select bind="@quantity" class="form-control">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </td>
     </tr>
     <tr>
-        <td>Total:</td>
-        <td><input type="number" bind="@total" /></td>
+        <td>Total (RM):</td>
+        <td><input type="number" bind="@total" class="form-control" /></td>
     </tr>
 </table>
 
@@ -42,10 +66,10 @@ else
     <table class="responsive-table">
         <thead>
             <tr>
-                <th scope="col">Order id</th>
+                <th scope="col">Order ID</th>
                 <th scope="col">Description</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
+                <th scope="col">Total (RM)</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
@@ -56,8 +80,17 @@ else
                     <th scope="row">@order.OrderId</th>
                     <td data-title="Description">@order.Description</td>
                     <td data-title="Quantity">@order.Quantity</td>
-                    <td data-title="Total">@order.Total</td>
-                    <td data-title="Status">@order.Status</td>
+                    <td data-title="Total">@order.Total.ToString("0.00")</td>
+                    <td data-title="Status">
+                        @if (order.Status == "Processed")
+                        {
+                            <span class="text-success"><i class="fa fa-check-circle"></i> @order.Status</span>
+                        }
+                        else
+                        {
+                            <span>@order.Status</span>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

@@ -17,8 +17,8 @@ namespace BlazorInsider.Worker
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args).
-                UseWindowsService()
+            Host.CreateDefaultBuilder(args)
+                //.UseWindowsService()
                 .ConfigureServices(services =>
                 {
                     services.AddHostedService<Worker>();
